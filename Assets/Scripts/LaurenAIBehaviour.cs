@@ -16,10 +16,10 @@ public class LaurenAIBehaviour : MonoBehaviour
             // Calculate direction to face the closest enemy.
             // Instantiate the projectile and calculate the direction to fire in.
             // Add force to the projectile.
-            //increase the count of active projectiles.
+            // increase the count of active projectiles.
             // after 1 second, destroy the fired projectile regardless of hit or not.
-            //wait 3 seconds before firing again at enemies in range.
-            //if no enemies in range, wait another 0.5 second(s) and check again.
+            // wait 3 seconds before firing again at enemies in range.
+            // if no enemies in range, wait another 0.5 second(s) and check again.
     void Start()
     {
         StartCoroutine(FireCoroutine());

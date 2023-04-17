@@ -29,7 +29,7 @@ public class LaurenProjectileCollisions : MonoBehaviour
     {
         navMeshAgent.speed = 1.75f;
         yield return new WaitForSeconds(3f);
-        navMeshAgent.speed = 3.5f;
+        navMeshAgent.speed = 3.5f;  
         
     }
 }
