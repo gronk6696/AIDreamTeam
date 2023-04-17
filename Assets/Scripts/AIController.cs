@@ -12,11 +12,10 @@ public class AIController : MonoBehaviour
         laurenGermz = GetComponent<NavMeshAgent>();
     }
 
+
+
     public void MoveToTargetLocation(Vector3 targetLocation)
     {
         laurenGermz.SetDestination(targetLocation);
     }
-
-
-
 }
