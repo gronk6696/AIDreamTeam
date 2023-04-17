@@ -5,8 +5,16 @@ using UnityEngine.AI;
 
 public class LaurenProjectileCollisions : MonoBehaviour
 {
-
+    public GameObject audioManagerObj;
+    public AudioManager audioScript;
     public int damage = -1;
+
+
+    public void Start(){
+        GameObject audioManagerObj = GameObject.FindWithTag("AudioHolder");
+
+        audioScript = audioManagerObj.GetComponent<AudioManager>();
+    }
     
     public void OnCollisionEnter(Collision collision)
     {
@@ -17,6 +25,7 @@ public class LaurenProjectileCollisions : MonoBehaviour
         //delete the projectile on collision.
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            audioScript.PlaySound("Squirt");
             HealthManager healthManager = collision.gameObject.GetComponentInParent<HealthManager>();
             healthManager.ChangeHealth(damage);
             Debug.Log("ENEMY HIT");

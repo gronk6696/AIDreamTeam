@@ -7,6 +7,10 @@ public class GameOver : MonoBehaviour
 {
     public GameObject gameOverScreen;
 
+    public void Start(){
+        gameOverScreen.SetActive(false);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))

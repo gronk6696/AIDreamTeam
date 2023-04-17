@@ -10,33 +10,38 @@ public class LaurenAIBehaviour : MonoBehaviour
     public int maxProjectilesPerWave = 5;
     public float delayBetweenWaves = 3f;
     private int currentProjectiles = 0;
+    private List<GameObject> enemies;
 
-            // Find all enemies within range
-            // If an enemy is in range, Fire projectiles at the closest enemy.
-            // Calculate direction to face the closest enemy.
-            // Instantiate the projectile and calculate the direction to fire in.
-            // Add force to the projectile.
-            // increase the count of active projectiles.
-            // after 1 second, destroy the fired projectile regardless of hit or not.
-            // wait 3 seconds before firing again at enemies in range.
-            // if no enemies in range, wait another 0.5 second(s) and check again.
+    // This script is responsible for firing projectiles at enemies within range
+// It uses a coroutine to periodically check for enemies and fire projectiles at them
+// The script keeps track of the number of projectiles fired and limits the number of projectiles per wave
+// The projectiles are fired towards the closest enemy within range
+// The script calculates the direction to face the closest enemy and sets the rotation of the character accordingly
+// It then instantiates the projectile prefab, sets its direction and velocity, and destroys it after a set time
+// If no enemies are in range, the coroutine waits for a short time before checking again
+// The script can also destroy enemies with the "Enemy" tag one by one, keeping track of the remaining enemies on the board.
+
+
     void Start()
     {
+        enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
         StartCoroutine(FireCoroutine());
     }
 
     IEnumerator FireCoroutine()
     {
-        while (true)
+        while (enemies.Count > 0)
         {
-
             List<GameObject> enemiesInRange = new List<GameObject>();
-            foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+            foreach (GameObject enemy in enemies)
             {
-                float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-                if (distanceToEnemy <= fireDistance)
+                if (enemy != null)
                 {
-                    enemiesInRange.Add(enemy);
+                    float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+                    if (distanceToEnemy <= fireDistance)
+                    {
+                        enemiesInRange.Add(enemy);
+                    }
                 }
             }
 
@@ -49,12 +54,15 @@ public class LaurenAIBehaviour : MonoBehaviour
 
                     foreach (GameObject enemy in enemiesInRange)
                     {
-                        float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-
-                        if (distanceToEnemy <= fireDistance && distanceToEnemy < closestDistance)
+                        if (enemy != null)
                         {
-                            closestEnemy = enemy;
-                            closestDistance = distanceToEnemy;
+                            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+
+                            if (distanceToEnemy <= fireDistance && distanceToEnemy < closestDistance)
+                            {
+                                closestEnemy = enemy;
+                                closestDistance = distanceToEnemy;
+                            }
                         }
                     }
 
@@ -82,6 +90,9 @@ public class LaurenAIBehaviour : MonoBehaviour
             {
                 yield return new WaitForSeconds(0.5f);
             }
+
+            // Remove destroyed enemies from the list
+            enemies.RemoveAll(enemy => enemy == null);
         }
     }
 }
