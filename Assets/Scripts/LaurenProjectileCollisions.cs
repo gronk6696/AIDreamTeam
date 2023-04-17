@@ -17,7 +17,7 @@ public class LaurenProjectileCollisions : MonoBehaviour
         //delete the projectile on collision.
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            HealthManager healthManager = collision.gameObject.GetComponent<HealthManager>();
+            HealthManager healthManager = collision.gameObject.GetComponentInParent<HealthManager>();
             healthManager.ChangeHealth(damage);
             Debug.Log("ENEMY HIT");
             NavMeshAgent navMeshAgent = collision.gameObject.GetComponent<NavMeshAgent>();

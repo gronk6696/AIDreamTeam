@@ -150,6 +150,7 @@ MonoBehaviour:
   health: 50
   healthBar: {fileID: 6074444186219854530}
   body: {fileID: 6380944384441827531}
+  barHeight: 0
 --- !u!1 &6074444185428392623
 GameObject:
   m_ObjectHideFlags: 0

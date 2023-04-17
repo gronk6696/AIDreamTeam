@@ -9,6 +9,7 @@ public class HealthManager : MonoBehaviour
     public int health = 10;
     public Slider healthBar;
     public GameObject body;
+    public int barHeight;
     public void ChangeHealth(int value)
     {
         Debug.Log("Health changed by " + value.ToString());
@@ -18,7 +19,7 @@ public class HealthManager : MonoBehaviour
     private void Update()
     {
         healthBar.value = health;
-        healthBar.transform.position = body.transform.position + new Vector3(0,16,0);
+        healthBar.transform.position = body.transform.position + new Vector3(0,barHeight,0);
         DeathCheck();
     }
 
