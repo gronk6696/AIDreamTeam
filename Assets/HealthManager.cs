@@ -2,18 +2,23 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour
 {
     public int health = 10;
-    // Start is called before the first frame update
+    public Slider healthBar;
+    public GameObject body;
     public void ChangeHealth(int value)
     {
+        Debug.Log("Health changed by " + value.ToString());
         health += value;
     }
 
     private void Update()
     {
+        healthBar.value = health;
+        healthBar.transform.position = body.transform.position + new Vector3(0,16,0);
         DeathCheck();
     }
 
