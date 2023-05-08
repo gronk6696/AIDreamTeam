@@ -58,10 +58,12 @@ public class ObjectPlacement : MonoBehaviour
             {
              selectedPrefab = prefabs[index];
             }
-         }
-         else {
+        }
+        else {
              SuccessfullyPurchased = false;
-         }
+        }
+
+        index = 0;
     }
 
     public void PlaceObjectOnPlane(int index)
